@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DriveHub v4 — Walk-in Drive Management Platform</title>
+<meta name="description" content="13 interview statuses, queue tracking, 5 login roles, 63+ integrations. Free 7-day trial.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#06080e;--bg1:#0c1018;--bg2:#131a28;--bg3:#1b2437;--bd:#1f2b3e;--bd1:#2c3b54;--t0:#f1f5f9;--t1:#c8d2e0;--t2:#8a99b0;--t3:#556275;--blue:#3b82f6;--blueD:rgba(59,130,246,.1);--blueG:rgba(59,130,246,.3);--cyan:#22d3ee;--grn:#34d399;--grnD:rgba(52,211,153,.1);--amb:#fbbf24;--vio:#a78bfa;--vioD:rgba(167,139,250,.1);--rose:#fb7185;--red:#ef4444;--teal:#2dd4bf;--font:'Plus Jakarta Sans',Georgia,'Times New Roman',serif;--mono:'Space Mono','Courier New',Consolas,monospace}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--font);background:var(--bg);color:var(--t0);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+.c{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.ao{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}.ao.v{opacity:1;transform:none}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}.d4{transition-delay:.24s}
+
+/* NAV */
+.nv{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(6,8,14,.84);backdrop-filter:blur(14px);border-bottom:1px solid rgba(31,43,62,.5)}
+.nv-in{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.5rem;max-width:1100px;margin:0 auto}
+.nv-b{display:flex;align-items:center;gap:.5rem;font-weight:800;font-size:1rem;letter-spacing:-.02em}
+.nv-m{width:28px;height:28px;background:linear-gradient(135deg,var(--blue),var(--vio));border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:.7rem}
+.nv-i{display:flex;align-items:center;gap:1.3rem}
+.nv-i a{font-size:.8rem;color:var(--t2);font-weight:500;transition:color .2s;font-family:var(--font)}.nv-i a:hover{color:var(--t0)}
+.nv-c{padding:.38rem .85rem;background:var(--blue);color:#fff!important;border-radius:6px;font-weight:600;font-size:.78rem}
+.nv-h{display:none;background:none;border:none;color:var(--t1);cursor:pointer}
+@media(max-width:680px){.nv-i{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg1);flex-direction:column;padding:.85rem;border-bottom:1px solid var(--bd);gap:.65rem}.nv-i.open{display:flex}.nv-h{display:block}}
+
+/* HERO */
+.hero{padding:7rem 0 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:650px;height:450px;top:-160px;left:-60px;background:radial-gradient(ellipse,rgba(59,130,246,.06),transparent 70%);pointer-events:none}
+.hero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center;position:relative;z-index:1}
+.hero-bg{display:inline-flex;align-items:center;gap:.35rem;padding:.22rem .7rem;background:var(--blueD);border:1px solid rgba(59,130,246,.18);border-radius:16px;font-size:.65rem;font-weight:600;color:var(--blue);margin-bottom:1.1rem}
+.hero-dot{width:5px;height:5px;background:var(--blue);border-radius:50%;animation:dp 2s infinite}
+@keyframes dp{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(2.2rem,5vw,3.3rem);font-weight:800;letter-spacing:-.045em;line-height:1.08;margin-bottom:1.1rem}
+.grad{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.05rem;color:var(--t2);max-width:470px;margin-bottom:1.6rem;font-weight:400}
+.hb{display:flex;gap:.5rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.35rem;padding:.6rem 1.2rem;border-radius:7px;font-size:.85rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;font-family:var(--font);letter-spacing:-.01em}.btn:active{transform:scale(.97)}
+.btn-b{background:var(--blue);color:#fff;box-shadow:0 3px 12px var(--blueG)}.btn-b:hover{background:#2563eb;transform:translateY(-1px)}
+.btn-w{background:#25D366;color:#fff}.btn-w:hover{background:#1fb855;transform:translateY(-1px)}
+.btn-g{background:var(--bg2);color:var(--t1);border:1px solid var(--bd)}.btn-g:hover{border-color:var(--bd1)}
+.mk{background:var(--bg1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.4)}
+.mk-b{display:flex;gap:.2rem;padding:.35rem .5rem;background:rgba(8,11,18,.9);border-bottom:1px solid var(--bd)}.mk-d{width:5px;height:5px;border-radius:50%;background:var(--bg3)}
+.mk-bd{padding:.55rem}
+.mk-s{display:grid;grid-template-columns:repeat(4,1fr);gap:.25rem;margin-bottom:.4rem}
+.ms{background:var(--bg2);border:1px solid var(--bd);border-radius:4px;padding:.3rem .35rem}
+.ms small{display:block;font-size:.35rem;color:var(--t3);text-transform:uppercase;letter-spacing:.04em}.ms b{font-size:.7rem;font-family:var(--mono);font-weight:700}
+.mk-r{display:flex;align-items:center;justify-content:space-between;padding:.2rem .3rem;border-bottom:1px solid var(--bd);font-size:.5rem}.mk-r:last-child{border-bottom:none}
+.mk-p{padding:1px 4px;border-radius:4px;font-size:.38rem;font-weight:700}
+@media(max-width:780px){.hero-in{grid-template-columns:1fr;text-align:center}.hero p{margin:0 auto 1.5rem}.hb{justify-content:center}.hero-mk{display:none}}
+
+/* SECTIONS */
+.sec{padding:3.8rem 0}
+.sl{font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;font-weight:700;margin-bottom:.55rem;font-family:var(--mono)}
+.st{font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:800;letter-spacing:-.045em;line-height:1.12;margin-bottom:.55rem}
+.sd{font-size:.95rem;color:var(--t2);max-width:540px;margin-bottom:2rem;font-weight:400}
+
+/* CARDS */
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.7rem}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:.85rem}
+.cd{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:1.15rem;transition:all .25s}.cd:hover{border-color:var(--blue);transform:translateY(-2px)}
+.cd-i{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:.65rem}
+.cd h3{font-size:.92rem;font-weight:700;margin-bottom:.3rem;letter-spacing:-.015em;font-family:var(--font)}.cd p{font-size:.82rem;color:var(--t2);line-height:1.6}
+.ft{position:relative;overflow:hidden}.fb{position:absolute;top:0;left:0;right:0;height:3px}
+.ft:nth-child(1) .fb{background:var(--blue)}.ft:nth-child(2) .fb{background:var(--grn)}.ft:nth-child(3) .fb{background:var(--vio)}.ft:nth-child(4) .fb{background:var(--amb)}.ft:nth-child(5) .fb{background:var(--cyan)}.ft:nth-child(6) .fb{background:var(--rose)}.ft:nth-child(7) .fb{background:#f472b6}.ft:nth-child(8) .fb{background:#60a5fa}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;counter-reset:step}
+.step{text-align:center}.step-n{counter-increment:step;display:flex;align-items:center;justify-content:center;width:42px;height:42px;margin:0 auto .7rem;border-radius:50%;background:var(--blueD);border:2px solid var(--blue);font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--blue)}.step-n::after{content:counter(step)}
+.step h4{font-size:.85rem;font-weight:700;margin-bottom:.2rem}.step p{font-size:.75rem;color:var(--t2)}
+
+/* INTEGRATIONS */
+.ig{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.ig-c{display:flex;align-items:center;gap:.35rem;padding:.35rem .7rem;background:var(--bg2);border:1px solid var(--bd);border-radius:7px;font-size:.72rem;font-weight:500;color:var(--t1);transition:all .2s}.ig-c:hover{border-color:var(--bd1);transform:translateY(-1px)}
+.ig-d{width:7px;height:7px;border-radius:2px;flex-shrink:0}
+
+/* PRICING */
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.9rem}
+.pc{background:var(--bg2);border:1px solid var(--bd);border-radius:13px;padding:1.5rem 1.3rem;position:relative;transition:all .25s}
+.pc.pop{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue),0 5px 20px var(--blueG)}
+.pc-tag{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:.55rem;font-weight:700;padding:.18rem .6rem;border-radius:8px;text-transform:uppercase}
+.pc h3{font-size:1rem;font-weight:800;margin-bottom:.4rem;font-family:var(--font);letter-spacing:-.01em}
+.pc-p{font-family:var(--mono);font-size:2.1rem;font-weight:700;margin-bottom:.05rem;letter-spacing:-.03em}
+.pc-per{font-size:.7rem;color:var(--t3);margin-bottom:1.1rem}
+.pc-f{font-size:.75rem;color:var(--t2);padding:.18rem 0;display:flex;align-items:flex-start;gap:.3rem}.pc-f .ck{color:var(--grn);font-weight:700;flex-shrink:0}
+.pc-bt{display:block;width:100%;padding:.65rem;border:none;border-radius:7px;font-family:var(--font);font-size:.85rem;font-weight:700;cursor:pointer;margin-top:1.15rem;text-align:center;transition:all .2s;letter-spacing:-.01em}
+.pc-bt.pri{background:var(--blue);color:#fff}.pc-bt.pri:hover{background:#2563eb}
+.pc-bt.sec{background:var(--bg3);color:var(--t1);border:1px solid var(--bd)}.pc-bt.sec:hover{border-color:var(--bd1)}
+
+/* TESTIMONIALS */
+.tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.7rem}
+.tc{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem}
+.tc .qt{font-size:.85rem;color:var(--t1);line-height:1.65;font-style:italic;margin-bottom:.75rem;font-family:var(--font)}
+.tc-w{display:flex;align-items:center;gap:.4rem}.tc-a{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff}
+.tc-n{font-size:.75rem;font-weight:600}.tc-r{font-size:.58rem;color:var(--t3)}
+
+/* FAQ */
+.fl{max-width:640px;margin:0 auto}
+.fq{border-bottom:1px solid var(--bd);padding:.95rem 0}
+.fq-q{display:flex;justify-content:space-between;align-items:center;gap:.8rem;font-size:.9rem;font-weight:700;cursor:pointer;color:var(--t0);user-select:none;font-family:var(--font)}.fq-q:hover{color:var(--blue)}
+.fq-q .ar{transition:transform .3s;font-size:.65rem;color:var(--t3)}.fq.open .fq-q .ar{transform:rotate(180deg)}
+.fq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;font-size:.82rem;color:var(--t2);line-height:1.65;font-family:var(--font)}.fq.open .fq-a{max-height:280px;padding-top:.6rem}
+
+/* LEAD FORM */
+.cs{padding:4rem 0;text-align:center;position:relative;overflow:hidden}
+.cs::before{content:'';position:absolute;top:50%;left:50%;width:400px;height:300px;background:radial-gradient(ellipse,rgba(59,130,246,.06),transparent 70%);transform:translate(-50%,-50%);pointer-events:none}
+.lf{max-width:440px;margin:0 auto;background:var(--bg2);border:1px solid var(--bd);border-radius:13px;padding:1.5rem;text-align:left;position:relative;z-index:1}
+.lf h3{font-size:1.1rem;font-weight:800;text-align:center;margin-bottom:.3rem;font-family:var(--font);letter-spacing:-.02em}
+.lf .ls{font-size:.78rem;color:var(--t2);text-align:center;margin-bottom:1.2rem}
+.lg{margin-bottom:.75rem}
+.ll{display:block;font-size:.72rem;font-weight:500;color:var(--t2);margin-bottom:.2rem}
+.li,.lsel,.lta{width:100%;padding:.55rem .7rem;background:var(--bg);border:1px solid var(--bd);border-radius:6px;color:var(--t0);font-family:var(--font);font-size:.82rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.li:focus,.lsel:focus,.lta:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,.14)}
+.li::placeholder,.lta::placeholder{color:var(--t3)}
+.li.err{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.1)}
+.le{font-size:.65rem;color:var(--red);margin-top:.15rem;display:none}
+.lsel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23556275' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .55rem center;padding-right:1.6rem}
+.lta{resize:vertical;min-height:44px}
+.lr{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+@media(max-width:480px){.lr{grid-template-columns:1fr}}
+.lb{width:100%;padding:.7rem;border:none;border-radius:7px;background:var(--blue);color:#fff;font-family:var(--font);font-size:.88rem;font-weight:700;cursor:pointer;margin-top:.3rem;transition:all .2s;letter-spacing:-.01em}.lb:hover{background:#2563eb}
+.ln{text-align:center;font-size:.62rem;color:var(--t3);margin-top:.55rem}
+.lok{display:none;text-align:center;padding:1.2rem}
+.lok .big{font-size:1.8rem;margin-bottom:.5rem}
+.lok h4{font-size:.95rem;font-weight:700;margin-bottom:.2rem}.lok p{font-size:.78rem;color:var(--t2);margin-bottom:.65rem}
+.lok-b{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+.ft{padding:2rem 0 1.2rem;border-top:1px solid var(--bd);background:var(--bg1)}
+.ft-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.ft-br{max-width:260px}.ft-br p{font-size:.72rem;color:var(--t3);margin-top:.4rem;line-height:1.5}
+.ft-cs{display:flex;gap:2rem}
+.ft-c h4{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);font-weight:600;margin-bottom:.5rem}
+.ft-c a{display:block;font-size:.75rem;color:var(--t2);padding:.1rem 0;transition:color .2s}.ft-c a:hover{color:var(--t0)}
+.ft-bt{margin-top:1.1rem;padding-top:.9rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;font-size:.62rem;color:var(--t3);flex-wrap:wrap;gap:.3rem}
+
+/* FLOAT */
+.flt{position:fixed;bottom:1.1rem;right:1.1rem;z-index:99;display:flex;flex-direction:column;gap:.45rem}
+.fb2{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;border:none;cursor:pointer}.fb2:hover{transform:scale(1.08)}
+.fw{background:#25D366;box-shadow:0 3px 14px rgba(37,211,102,.3)}.fw svg{width:23px;height:23px;fill:#fff}
+.fc{background:var(--blue);box-shadow:0 3px 14px var(--blueG)}.fc svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2}
+
+/* ADMIN */
+.ao2{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:9999;display:none;align-items:center;justify-content:center}.ao2.open{display:flex}
+.ab{background:var(--bg1);border:1px solid var(--bd);border-radius:12px;width:94%;max-width:660px;max-height:84vh;overflow-y:auto;padding:1.6rem;position:relative}
+.ab h2{font-size:1rem;font-weight:700;margin-bottom:.15rem}
+.ax{position:absolute;top:.75rem;right:.75rem;background:none;border:none;color:var(--t3);font-size:1rem;cursor:pointer}
+.ap{display:flex;gap:.4rem;margin:.75rem 0}
+.ap input{flex:1;padding:.45rem .6rem;background:var(--bg);border:1px solid var(--bd);border-radius:6px;color:var(--t0);font-family:inherit;font-size:.8rem;outline:none}
+.ap button{padding:.45rem .75rem;background:var(--blue);color:#fff;border:none;border-radius:6px;font-family:inherit;font-weight:600;cursor:pointer;font-size:.78rem}
+.at{width:100%;border-collapse:collapse;font-size:.7rem;margin:.65rem 0}
+.at th{text-align:left;padding:.35rem .3rem;font-size:.55rem;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--bd);background:var(--bg)}
+.at td{padding:.35rem .3rem;border-bottom:1px solid var(--bd);color:var(--t1);white-space:nowrap}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+
+/* SOCIAL */
+.sp{padding:1.5rem 0;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);background:var(--bg1);text-align:center}
+.sp small{display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--t3);font-weight:600;margin-bottom:.7rem}
+.sp-l{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;opacity:.4}
+.sp-l span{font-size:.95rem;font-weight:700;color:var(--t2)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nv"><div class="nv-in">
+  <div class="nv-b"><div class="nv-m">D</div>DriveHub</div>
+  <button class="nv-h" onclick="document.getElementById('ni').classList.toggle('open')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+  <div class="nv-i" id="ni"><a href="#features">Features</a><a href="#integrations">Integrations</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#cta" class="nv-c">Start Free Trial</a><a href="javascript:void(0)" onclick="openAdmin()" style="font-size:.65rem;color:var(--t3)">Admin</a></div>
+</div></div>
+
+<!-- HERO -->
+<section class="hero">
+<div class="c"><div class="hero-in">
+  <div class="ao">
+    <div class="hero-bg"><span class="hero-dot"></span> v4 — 13 Statuses + Queue + Recruiter Controls</div>
+    <h1>Stop running walk-in drives <span class="grad">on paper.</span></h1>
+    <p>13 interview statuses, first-come-first-serve queue, recruiter controls, security check-in, 63+ integrations. Offline-first.</p>
+    <div class="hb">
+      <a href="#cta" class="btn btn-b">Start 7-Day Free Trial</a>
+      <a href="https://wa.me/919071250522?text=Hi%20Krishna%2C%20interested%20in%20DriveHub!" target="_blank" class="btn btn-w">WhatsApp</a>
+      <a href="tel:+919071250522" class="btn btn-g">Call</a>
+    </div>
+  </div>
+  <div class="hero-mk ao d2" style="position:relative">
+    <div class="mk"><div class="mk-b"><div class="mk-d"></div><div class="mk-d"></div><div class="mk-d"></div></div>
+      <div class="mk-bd"><div class="mk-s"><div class="ms"><small>Total</small><b style="color:var(--blue)">384</b></div><div class="ms"><small>Pipeline</small><b style="color:var(--vio)">142</b></div><div class="ms"><small>Round 1</small><b style="color:var(--amb)">42</b></div><div class="ms"><small>Selected</small><b style="color:var(--grn)">76</b></div></div>
+        <div class="mk-r"><span style="color:var(--grn);font-family:var(--mono);font-weight:700">#1</span><span style="font-family:var(--mono);color:var(--blue)">AC-384</span><b>Arun P.</b><span class="mk-p" style="background:rgba(251,191,36,.1);color:var(--amb)">Round 1</span></div>
+        <div class="mk-r"><span style="color:var(--grn);font-family:var(--mono);font-weight:700">#2</span><span style="font-family:var(--mono);color:var(--blue)">AC-383</span><b>Meera J.</b><span class="mk-p" style="background:rgba(244,114,182,.1);color:#f472b6">HR Round</span></div>
+        <div class="mk-r"><span style="color:var(--grn);font-family:var(--mono);font-weight:700">#3</span><span style="font-family:var(--mono);color:var(--blue)">AC-382</span><b>Vikram D.</b><span class="mk-p" style="background:var(--grnD);color:var(--grn)">Selected</span></div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<div class="sp"><small>Trusted by recruitment teams at</small><div class="sp-l"><span>Optum</span><span>IBM</span><span>TCS</span><span>Infosys</span><span>Wipro</span><span>HCL</span></div></div>
+
+<!-- PROBLEMS -->
+<section class="sec" style="background:var(--bg1)"><div class="c">
+  <div class="sl ao" style="color:var(--rose)">The Problem</div>
+  <h2 class="st ao d1">Walk-in drives are <span style="color:var(--rose)">broken.</span></h2>
+  <p class="sd ao d2">Paper forms, no queue system, 4-status pipelines, recruiters can't update status. Sound familiar?</p>
+  <div class="g4">
+    <div class="cd ao"><div class="cd-i" style="background:rgba(251,113,133,.1)">📋</div><h3>Paper Chaos</h3><p>Lost forms, illegible handwriting, hours of manual entry.</p></div>
+    <div class="cd ao d1"><div class="cd-i" style="background:rgba(251,191,36,.1)">🔌</div><h3>No Queue System</h3><p>Candidates wait 45 min. No first-come-first-serve tracking.</p></div>
+    <div class="cd ao d2"><div class="cd-i" style="background:var(--vioD)">🔗</div><h3>4-Status Limit</h3><p>Registered, in-progress, selected, rejected. 6-round interviews need more.</p></div>
+    <div class="cd ao d3"><div class="cd-i" style="background:var(--blueD)">👥</div><h3>Recruiter Blind Spot</h3><p>Interviewers can't update status. No notes. No accountability.</p></div>
+  </div>
+</div></section>
+
+<!-- FEATURES -->
+<section class="sec" id="features"><div class="c">
+  <div class="sl ao" style="color:var(--blue)">Features</div>
+  <h2 class="st ao d1">Everything v4 brings. <span style="color:var(--blue)">Built by a recruiter.</span></h2>
+  <div class="g3">
+    <div class="cd ft ao"><div class="fb"></div><div class="cd-i" style="background:var(--blueD)">📊</div><h3>13 Interview Statuses</h3><p>Registered → Checked In → Screening → Round 1 → Round 2 → HR → Offer → Selected + Hold, Reject, No Show, Blacklist.</p></div>
+    <div class="cd ft ao d1"><div class="fb"></div><div class="cd-i" style="background:var(--grnD)">🔢</div><h3>Queue System (FCFS)</h3><p>Auto queue numbers on check-in. #1, #2, #3... visible to admin, recruiter, security, and candidates.</p></div>
+    <div class="cd ft ao d2"><div class="fb"></div><div class="cd-i" style="background:var(--vioD)">👥</div><h3>Recruiter Controls</h3><p>8 status buttons + notes per candidate. Recruiters own their pipeline. Full accountability.</p></div>
+    <div class="cd ft ao d3"><div class="fb"></div><div class="cd-i" style="background:rgba(251,191,36,.1)">🛡️</div><h3>Security Desk</h3><p>PIN login. Only 2 buttons: Check In + No Show. Queue position displayed. Entry time tracked.</p></div>
+    <div class="cd ft ao d4"><div class="fb"></div><div class="cd-i" style="background:rgba(34,211,238,.1)">📱</div><h3>Offline-First PWA</h3><p>Works without internet. IndexedDB. Auto-syncs. Install on any device.</p></div>
+    <div class="cd ft ao"><div class="fb"></div><div class="cd-i" style="background:rgba(251,113,133,.1)">🔗</div><h3>63+ Integrations</h3><p>Assessment (14+SPlan), ATS (20), HR (9), VMS India (20). Full API key config.</p></div>
+    <div class="cd ft ao d1"><div class="fb"></div><div class="cd-i" style="background:rgba(244,114,182,.1)">📧</div><h3>Bulk Invite</h3><p>Email blast + 13 platforms: WhatsApp, Teams, Slack, LinkedIn, QR code.</p></div>
+    <div class="cd ft ao d2"><div class="fb"></div><div class="cd-i" style="background:rgba(96,165,250,.1)">🔍</div><h3>Track Status</h3><p>Anyone checks queue position + status anytime. Token or email lookup.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW IT WORKS -->
+<section class="sec" style="background:var(--bg1);text-align:center"><div class="c">
+  <div class="sl ao" style="color:var(--cyan)">How It Works</div>
+  <h2 class="st ao d1" style="max-width:440px;margin:0 auto .45rem">Live in <span style="color:var(--cyan)">3 minutes.</span></h2>
+  <p class="sd ao d2" style="margin:0 auto 2rem">No IT team needed.</p>
+  <div class="steps">
+    <div class="step ao"><div class="step-n"></div><h4>Create Drive</h4><p>Org, title, date, venue, positions, recruiters.</p></div>
+    <div class="step ao d1"><div class="step-n"></div><h4>Send Invites</h4><p>Bulk email, WhatsApp, 13+ channels.</p></div>
+    <div class="step ao d2"><div class="step-n"></div><h4>Check In</h4><p>Security scans tokens. Queue auto-assigned.</p></div>
+    <div class="step ao d3"><div class="step-n"></div><h4>Interview</h4><p>Recruiters update 13 statuses + notes.</p></div>
+  </div>
+</div></section>
+
+<!-- INTEGRATIONS -->
+<section class="sec" id="integrations" style="text-align:center"><div class="c">
+  <div class="sl ao" style="color:var(--vio)">63+ Integrations</div>
+  <h2 class="st ao d1" style="max-width:460px;margin:0 auto .45rem">Assessment + ATS + HR + <span style="color:var(--vio)">VMS India.</span></h2>
+  <div style="font-size:.68rem;font-weight:600;color:var(--t3);margin:.8rem 0 .4rem" class="ao">ASSESSMENT (14)</div>
+  <div class="ig ao"><div class="ig-c"><div class="ig-d" style="background:#1ba94c"></div>HackerRank</div><div class="ig-c"><div class="ig-d" style="background:#f97316"></div>SPlan</div><div class="ig-c"><div class="ig-d" style="background:#4fc3f7"></div>Codility</div><div class="ig-c"><div class="ig-d" style="background:#ff6d00"></div>Mettl</div><div class="ig-c"><div class="ig-d" style="background:#0d9488"></div>TestGorilla</div><div class="ig-c"><div class="ig-d" style="background:#2196f3"></div>AMCAT</div><div class="ig-c"><div class="ig-d" style="background:#1565c0"></div>CodeSignal</div></div>
+  <div style="font-size:.68rem;font-weight:600;color:var(--t3);margin:.8rem 0 .4rem" class="ao">ATS (20)</div>
+  <div class="ig ao"><div class="ig-c"><div class="ig-d" style="background:#43a047"></div>Greenhouse</div><div class="ig-c"><div class="ig-d" style="background:#00796b"></div>Lever</div><div class="ig-c"><div class="ig-d" style="background:#0057b8"></div>Workday</div><div class="ig-c"><div class="ig-d" style="background:#1e88e5"></div>Darwinbox</div><div class="ig-c"><div class="ig-d" style="background:#4667b1"></div>Naukri RMS</div><div class="ig-c"><div class="ig-d" style="background:#d32f2f"></div>Zoho</div><div class="ig-c"><div class="ig-d" style="background:#73c900"></div>BambooHR</div><div class="ig-c"><div class="ig-d" style="background:#37474f"></div>Custom API</div></div>
+  <div style="font-size:.68rem;font-weight:600;color:var(--t3);margin:.8rem 0 .4rem" class="ao">HR & COMM (9) + VMS INDIA (20)</div>
+  <div class="ig ao"><div class="ig-c"><div class="ig-d" style="background:#5c6bc0"></div>Teams</div><div class="ig-c"><div class="ig-d" style="background:#2196f3"></div>Zoom</div><div class="ig-c"><div class="ig-d" style="background:#25D366"></div>WhatsApp Biz</div><div class="ig-c"><div class="ig-d" style="background:#006bff"></div>Calendly</div><div class="ig-c"><div class="ig-d" style="background:#6c5ce7"></div>Veris</div><div class="ig-c"><div class="ig-d" style="background:#636e72"></div>MyGate</div><div class="ig-c"><div class="ig-d" style="background:#0652DD"></div>LobbyTrack</div><div class="ig-c"><div class="ig-d" style="background:#FFC312"></div>IDCube</div></div>
+</div></section>
+
+<!-- PRICING -->
+<section class="sec" id="pricing" style="background:var(--bg1);text-align:center"><div class="c">
+  <div class="sl ao" style="color:var(--grn)">Pricing</div>
+  <h2 class="st ao d1" style="max-width:460px;margin:0 auto .45rem">Start free. <span style="color:var(--grn)">Scale when ready.</span></h2>
+  <p class="sd ao d2" style="margin:0 auto 2rem">7-day free trial. No credit card.</p>
+  <div class="pg" style="text-align:left">
+    <div class="pc ao"><h3>Starter</h3><div class="pc-p" style="color:var(--t0)">&#8377;2,999<span style="font-size:.75rem;color:var(--t3)">/mo</span></div><div class="pc-per">~$36/mo · 500 candidates/drive</div><div class="pc-f"><span class="ck">✓</span>1 admin, 10 recruiters</div><div class="pc-f"><span class="ck">✓</span>13 statuses + queue</div><div class="pc-f"><span class="ck">✓</span>Offline mode</div><div class="pc-f"><span class="ck">✓</span>All sharing channels</div><div class="pc-f"><span class="ck">✓</span>CSV export</div><a href="#cta" class="pc-bt sec">Start Free Trial</a></div>
+    <div class="pc pop ao d1"><div class="pc-tag">Popular</div><h3>Growth</h3><div class="pc-p" style="color:var(--blue)">&#8377;9,999<span style="font-size:.75rem;color:var(--t3)">/mo</span></div><div class="pc-per">~$120/mo · Unlimited candidates</div><div class="pc-f"><span class="ck">✓</span>5 admins, 25 recruiters</div><div class="pc-f"><span class="ck">✓</span>Bulk upload + invite</div><div class="pc-f"><span class="ck">✓</span>Recruiter status controls</div><div class="pc-f"><span class="ck">✓</span>Security desk</div><div class="pc-f"><span class="ck">✓</span>Basic integrations</div><a href="#cta" class="pc-bt pri">Get Growth — 7 Days Free</a></div>
+    <div class="pc ao d2"><h3>Pro</h3><div class="pc-p" style="color:var(--vio)">&#8377;29,999<span style="font-size:.75rem;color:var(--t3)">/mo</span></div><div class="pc-per">~$360/mo · 10 admins, 50 recruiters</div><div class="pc-f"><span class="ck">✓</span>5 assessment API integrations</div><div class="pc-f"><span class="ck">✓</span>ATS sync</div><div class="pc-f"><span class="ck">✓</span>VMS integration</div><div class="pc-f"><span class="ck">✓</span>Priority support</div><div class="pc-f"><span class="ck">✓</span>Advanced analytics</div><a href="#cta" class="pc-bt sec">Get Pro</a></div>
+    <div class="pc ao d3"><h3>Enterprise</h3><div class="pc-p" style="color:var(--amb)">Custom</div><div class="pc-per">SSO/SAML · White-label · Dedicated CSM</div><div class="pc-f"><span class="ck">✓</span>Unlimited everything</div><div class="pc-f"><span class="ck">✓</span>63+ integrations</div><div class="pc-f"><span class="ck">✓</span>On-site onboarding</div><div class="pc-f"><span class="ck">✓</span>Custom webhooks</div><div class="pc-f"><span class="ck">✓</span>SLA + audit logs</div><a href="https://wa.me/919071250522?text=Hi%20Krishna%2C%20interested%20in%20DriveHub%20Enterprise!" target="_blank" class="pc-bt sec">Contact Sales</a></div>
+  </div>
+  <p class="ao" style="font-size:.72rem;color:var(--t3);margin-top:1rem">Global: $499/mo Pro · $1,999/mo Enterprise · Annual: 17% discount</p>
+</div></section>
+
+<!-- TESTIMONIALS -->
+<section class="sec" style="text-align:center"><div class="c">
+  <div class="sl ao" style="color:var(--amb)">What People Say</div>
+  <div class="tg" style="text-align:left;margin-top:1.2rem">
+    <div class="tc ao"><p class="qt">"13 statuses changed everything. We track Round 1, Round 2, HR — recruiters update directly. No more Excel."</p><div class="tc-w"><div class="tc-a" style="background:var(--blue)">RP</div><div><div class="tc-n">Rajesh P.</div><div class="tc-r">Sr. HR Manager</div></div></div></div>
+    <div class="tc ao d1"><p class="qt">"Queue system eliminated the chaos. Candidates know their position. Security just scans and checks in."</p><div class="tc-w"><div class="tc-a" style="background:var(--grn)">AM</div><div><div class="tc-n">Anita M.</div><div class="tc-r">TA Lead</div></div></div></div>
+    <div class="tc ao d2"><p class="qt">"Bulk email invite to 200 colleges. Candidates self-register. Recruiters add interview notes. Game changer."</p><div class="tc-w"><div class="tc-a" style="background:var(--vio)">SK</div><div><div class="tc-n">Suresh K.</div><div class="tc-r">Campus Coordinator</div></div></div></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="background:var(--bg1);text-align:center"><div class="c">
+  <div class="sl ao" style="color:var(--cyan)">FAQ</div>
+  <div class="fl" style="text-align:left;margin-top:1.2rem">
+    <div class="fq ao"><div class="fq-q" onclick="this.parentElement.classList.toggle('open')">What are the 13 interview statuses?<span class="ar">▼</span></div><div class="fq-a">Registered, Checked In, Screening, In Progress, Round 1 Interview, Round 2 Interview, HR Round, Offer Waiting, Selected, On Hold, Rejected, No Show, Blacklisted. Each with color-coded pills and status history tracking.</div></div>
+    <div class="fq ao"><div class="fq-q" onclick="this.parentElement.classList.toggle('open')">How does the queue system work?<span class="ar">▼</span></div><div class="fq-a">When security checks in a candidate, they get a queue number (#1, #2, #3...) based on entry time. First come, first serve. Queue position is visible to admin, recruiter, security, and the candidate themselves via Track Status.</div></div>
+    <div class="fq ao"><div class="fq-q" onclick="this.parentElement.classList.toggle('open')">Can recruiters update candidate status?<span class="ar">▼</span></div><div class="fq-a">Yes. Recruiters log in with their phone number and see their assigned candidates. Each candidate card has 8 action buttons (Screening, Round 1, Round 2, HR, Offer, Selected, Hold, Reject) plus a notes field for interview feedback.</div></div>
+    <div class="fq ao"><div class="fq-q" onclick="this.parentElement.classList.toggle('open')">What does security desk do?<span class="ar">▼</span></div><div class="fq-a">Security logs in with a 4-digit PIN. They scan/type token numbers. Only 2 buttons: Check In (records entry time + queue number) and No Show. Security doesn't manage interview status — that's the recruiter's job.</div></div>
+    <div class="fq ao"><div class="fq-q" onclick="this.parentElement.classList.toggle('open')">What's the pricing?<span class="ar">▼</span></div><div class="fq-a">India: Starter ₹2,999/mo, Growth ₹9,999/mo, Pro ₹29,999/mo, Enterprise custom. Global: $499/mo Pro, $1,999/mo Enterprise. All plans start with a 7-day free trial, no credit card needed.</div></div>
+    <div class="fq ao"><div class="fq-q" onclick="this.parentElement.classList.toggle('open')">Does it work offline?<span class="ar">▼</span></div><div class="fq-a">Yes. All data stored in IndexedDB. Candidates register, security checks in, recruiters update status — all without internet. Syncs automatically when reconnected.</div></div>
+  </div>
+</div></section>
+
+<!-- CTA + FORM -->
+<section class="cs" id="cta">
+  <div class="c" style="position:relative;z-index:1">
+    <h2 class="st ao" style="margin-bottom:.5rem">Start Your 7-Day Free Trial</h2>
+    <p class="sd ao d1" style="margin:0 auto 1.5rem;text-align:center;max-width:450px">Full access. No credit card. Personal onboarding.</p>
+    <div class="lf ao d2" id="lf">
+      <h3>Start Free Trial</h3>
+      <p class="ls">We'll reach out within 24 hours.</p>
+      <form onsubmit="sub(event)" id="lfm" novalidate>
+        <div class="lr"><div class="lg"><label class="ll">Full Name *</label><input type="text" class="li" id="lN" placeholder="Your name"><div class="le" id="eN">Required</div></div><div class="lg"><label class="ll">Email *</label><input type="email" class="li" id="lE" placeholder="you&#64;company.com"><div class="le" id="eE">Valid email required</div></div></div>
+        <div class="lr"><div class="lg"><label class="ll">Phone *</label><input type="tel" class="li" id="lP" placeholder="+91 XXXXX XXXXX"><div class="le" id="eP">Valid phone required</div></div><div class="lg"><label class="ll">Company *</label><input type="text" class="li" id="lC" placeholder="Your organization"><div class="le" id="eC">Required</div></div></div>
+        <div class="lg"><label class="ll">Drives per year?</label><select class="lsel" id="lD"><option value="">Select...</option><option>1-5</option><option>6-15</option><option>16-50</option><option>50+</option></select></div>
+        <div class="lg"><label class="ll">Biggest challenge?</label><textarea class="lta" id="lCh" placeholder="e.g. No queue system, recruiters can't update status..."></textarea></div>
+        <button type="submit" class="lb" id="sBtn">Start My Free Trial</button>
+      </form>
+      <p class="ln">7-day free trial. No credit card. Cancel anytime.</p>
+    </div>
+    <div class="lok" id="lok">
+      <div class="big">🎉</div>
+      <h4>Your trial is ready!</h4>
+      <p>Krishna will reach out within 24 hours.</p>
+      <div class="lok-b">
+        <a href="https://wa.me/919071250522?text=Hi%20Krishna%2C%20I%20signed%20up%20for%20DriveHub!" target="_blank" class="btn btn-w">WhatsApp Krishna</a>
+        <a href="tel:+919071250522" class="btn btn-g">Call Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="ft"><div class="c">
+  <div class="ft-in">
+    <div class="ft-br"><div class="nv-b"><div class="nv-m">D</div>DriveHub</div><p>Walk-in drive management. Built in Bengaluru by Krishna Boopathy.</p></div>
+    <div class="ft-cs">
+      <div class="ft-c"><h4>Product</h4><a href="#features">Features</a><a href="#integrations">Integrations</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+      <div class="ft-c"><h4>Connect</h4><a href="https://wa.me/919071250522" target="_blank">WhatsApp</a><a href="tel:+919071250522">+91 9071250522</a><a href="mailto:krishna.bhoopathy13&#64;gmail.com">Email</a></div>
+    </div>
+  </div>
+  <div class="ft-bt"><span>&#169; 2026 DriveHub. All rights reserved.</span><span>Made for recruitment teams</span></div>
+</div></div>
+
+<!-- FLOATING -->
+<div class="flt">
+  <a href="tel:+919071250522" class="fb2 fc" title="Call"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+  <a href="https://wa.me/919071250522?text=Hi%20Krishna%2C%20interested%20in%20DriveHub!" target="_blank" class="fb2 fw" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+</div>
+
+<!-- ADMIN -->
+<div class="ao2" id="ao2">
+  <div class="ab">
+    <button class="ax" onclick="closeAdmin()">&#10005;</button>
+    <h2>Lead Management</h2>
+    <p style="font-size:.72rem;color:var(--t3)">Password protected</p>
+    <div id="al"><div class="ap"><input type="password" id="apw" placeholder="Admin password" onkeydown="if(event.key==='Enter')auth()"><button onclick="auth()">Unlock</button></div><p id="ae" style="color:var(--red);font-size:.72rem;display:none">Wrong password</p></div>
+    <div id="apn" style="display:none"><div id="ai" style="font-size:.78rem;color:var(--t2);margin-bottom:.4rem"></div><div style="overflow-x:auto"><table class="at"><thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Drives</th><th>Challenge</th><th>Date</th></tr></thead><tbody id="atb"></tbody></table></div><div style="display:flex;gap:.35rem;flex-wrap:wrap"><button class="btn btn-b" onclick="dlX()" style="font-size:.75rem;padding:.4rem .75rem">Download Excel</button><button class="btn btn-g" onclick="clr()" style="font-size:.75rem;padding:.4rem .75rem;color:var(--red)">Clear All</button></div></div>
+  </div>
+</div>
+
+<script>
+// Scroll reveal
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('v');obs.unobserve(x.target)}})},{threshold:0.06,rootMargin:'0px 0px -12px 0px'});
+document.querySelectorAll('.ao').forEach(function(el){obs.observe(el)});
+setTimeout(function(){document.querySelectorAll('.ao:not(.v)').forEach(function(el){el.classList.add('v')})},1100);
+
+// Form validation + submit
+function sub(e){
+  e.preventDefault();
+  document.querySelectorAll('.li').forEach(function(f){f.classList.remove('err')});
+  document.querySelectorAll('.le').forEach(function(f){f.style.display='none'});
+  var n=document.getElementById('lN').value.trim();
+  var em=document.getElementById('lE').value.trim();
+  var ph=document.getElementById('lP').value.trim();
+  var co=document.getElementById('lC').value.trim();
+  var ok=true;
+  if(!n){document.getElementById('lN').classList.add('err');document.getElementById('eN').style.display='block';ok=false}
+  if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){document.getElementById('lE').classList.add('err');document.getElementById('eE').style.display='block';ok=false}
+  if(!ph||!/^[\d\s\+\-\(\)]{7,}$/.test(ph)){document.getElementById('lP').classList.add('err');document.getElementById('eP').style.display='block';ok=false}
+  if(!co){document.getElementById('lC').classList.add('err');document.getElementById('eC').style.display='block';ok=false}
+  if(!ok){document.getElementById('sBtn').style.animation='shake .4s ease';setTimeout(function(){document.getElementById('sBtn').style.animation=''},400);return}
+  var lead={name:n,email:em,phone:ph,company:co,drives:document.getElementById('lD').value,challenge:document.getElementById('lCh').value.trim(),ts:new Date().toISOString(),source:'landing_v4'};
+  var leads=JSON.parse(localStorage.getItem('dh_leads')||'[]');leads.push(lead);localStorage.setItem('dh_leads',JSON.stringify(leads));
+  document.getElementById('lfm').style.display='none';
+  var lf=document.getElementById('lf');
+  lf.querySelector('h3').style.display='none';
+  lf.querySelector('.ls').style.display='none';
+  lf.querySelector('.ln').style.display='none';
+  document.getElementById('lok').style.display='block';
+  var msg='New DriveHub Lead!%0AName: '+encodeURIComponent(n)+'%0AEmail: '+encodeURIComponent(em)+'%0APhone: '+encodeURIComponent(ph)+'%0ACompany: '+encodeURIComponent(co);
+  window.open('https://wa.me/919071250522?text='+msg,'_blank');
+}
+
+// Admin
+var PWD='drivehub2026';
+function openAdmin(){document.getElementById('ao2').classList.add('open')}
+function closeAdmin(){document.getElementById('ao2').classList.remove('open');document.getElementById('apn').style.display='none';document.getElementById('al').style.display='block';document.getElementById('apw').value='';document.getElementById('ae').style.display='none'}
+function auth(){if(document.getElementById('apw').value===PWD){document.getElementById('al').style.display='none';document.getElementById('apn').style.display='block';rL()}else{document.getElementById('ae').style.display='block';document.getElementById('apw').value=''}}
+function rL(){var leads=JSON.parse(localStorage.getItem('dh_leads')||'[]');document.getElementById('ai').innerHTML='<b>'+leads.length+'</b> leads captured';var tb=document.getElementById('atb');if(!leads.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--t3);padding:1.2rem">No leads yet</td></tr>';return}tb.innerHTML=leads.map(function(l,i){return '<tr><td>'+(i+1)+'</td><td style="color:var(--t0);font-weight:500">'+esc(l.name)+'</td><td>'+esc(l.email)+'</td><td>'+esc(l.phone)+'</td><td>'+esc(l.company)+'</td><td>'+esc(l.drives||'-')+'</td><td style="max-width:110px;overflow:hidden;text-overflow:ellipsis">'+esc(l.challenge||'-')+'</td><td>'+new Date(l.ts).toLocaleDateString()+'</td></tr>'}).join('')}
+function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+function dlX(){var leads=JSON.parse(localStorage.getItem('dh_leads')||'[]');if(!leads.length)return alert('No leads');var h=['#','Name','Email','Phone','Company','Drives/Year','Challenge','Date','Source'];var rows=leads.map(function(l,i){return[i+1,l.name,l.email,l.phone,l.company,l.drives||'',l.challenge||'',new Date(l.ts).toLocaleString(),l.source||'']});var csv='\uFEFF'+[h].concat(rows).map(function(r){return r.map(function(v){return '"'+String(v||'').replace(/"/g,'""')+'"'}).join(',')}).join('\n');var b=new Blob([csv],{type:'text/csv;charset=utf-8;'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='DriveHub_Leads_'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)}
+function clr(){if(!confirm('Delete ALL leads?'))return;localStorage.removeItem('dh_leads');rL()}
+document.getElementById('ao2').addEventListener('click',function(e){if(e.target===this)closeAdmin()});
+</script>
+</body>
+</html>
